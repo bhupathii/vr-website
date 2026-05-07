@@ -250,6 +250,60 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ──── LEADERSHIP ──── */}
+      <section className="section bg-white">
+        <div className="container-md">
+          <div className="text-center mb-10">
+            <span className="inline-block bg-indigo-100 text-indigo-800 text-sm font-semibold px-4 py-1 rounded-full mb-3">Leadership</span>
+            <h2 className="text-2xl font-bold text-primary mb-2">Meet Our Directors</h2>
+            <p className="text-gray-700 text-sm">The people behind every student's success story</p>
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* CEO */}
+            <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col sm:flex-row">
+              <div className="sm:w-2/5 h-72 sm:h-auto relative overflow-hidden shrink-0">
+                <img
+                  src="/ceo.png"
+                  alt="CEO & Founder"
+                  className="w-full h-full object-cover object-top"
+                  loading="lazy"
+                />
+              </div>
+              <div className="p-6 sm:p-8 sm:w-3/5 flex flex-col justify-center bg-gradient-to-br from-white to-gray-50">
+                <h3 className="text-2xl font-bold text-gray-900 mb-1">Nishanth Komati</h3>
+                <p className="text-primary font-semibold mb-4 text-sm tracking-wide uppercase">CEO & Founder</p>
+                <p className="text-gray-600 leading-relaxed text-sm">
+                  Based in Switzerland with over a decade of experience in overseas education, Nishanth leads our vision to empower students. His strategic direction and global perspective have helped thousands achieve their study abroad dreams.
+                </p>
+              </div>
+            </div>
+            {/* MD */}
+            <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col sm:flex-row">
+              <div className="sm:w-2/5 h-72 sm:h-auto relative overflow-hidden shrink-0">
+                <img
+                  src="/md.png"
+                  alt="Managing Director"
+                  className="w-full h-full object-cover object-top"
+                  loading="lazy"
+                />
+              </div>
+              <div className="p-6 sm:p-8 sm:w-3/5 flex flex-col justify-center bg-gradient-to-br from-white to-gray-50">
+                <h3 className="text-2xl font-bold text-gray-900 mb-1">Vasudev Komati</h3>
+                <p className="text-primary font-semibold mb-4 text-sm tracking-wide uppercase">Managing Director</p>
+                <p className="text-gray-600 leading-relaxed text-sm">
+                  Driving operational excellence and building global partnerships, Vasudev ensures that our consulting services remain top-tier, delivering unparalleled value and seamless experiences to our students.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="text-center mt-8">
+            <Link to="/about" className="inline-flex items-center gap-2 btn-outline">
+              Learn More About Us <ArrowRight size={14} />
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* ──── ENQUIRY FORM ──── */}
       <section className="section bg-white">
         <div className="container-md">
