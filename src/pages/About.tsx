@@ -97,11 +97,11 @@ export default function About() {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col sm:flex-row group">
-              <div className="sm:w-2/5 h-64 sm:h-auto relative overflow-hidden shrink-0">
+              <div className="sm:w-2/5 h-72 sm:h-auto relative overflow-hidden shrink-0">
                 <img
                   src="/ceo.png"
                   alt="CEO & Founder"
-                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full object-cover object-top"
                   loading="lazy"
                 />
               </div>
@@ -115,11 +115,11 @@ export default function About() {
             </div>
 
             <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col sm:flex-row group">
-              <div className="sm:w-2/5 h-64 sm:h-auto relative overflow-hidden shrink-0">
+              <div className="sm:w-2/5 h-72 sm:h-auto relative overflow-hidden shrink-0">
                 <img
                   src="/md.png"
                   alt="Managing Director"
-                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full object-cover object-top"
                   loading="lazy"
                 />
               </div>
