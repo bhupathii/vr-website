@@ -1,3 +1,4 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { CheckCircle, Users, Landmark, Globe, Award, ArrowRight } from 'lucide-react';
 import CountryCard from '../components/CountryCard';
@@ -21,6 +22,163 @@ const stats = [
   { value: '6',     label: 'Countries Covered', Icon: Globe, color: 'text-emerald-600', bg: 'bg-emerald-50', border: 'border-emerald-200' },
   { value: '95%',   label: 'Visa Success Rate', Icon: Award, color: 'text-amber-600', bg: 'bg-amber-50', border: 'border-amber-200' },
 ];
+
+/* ── Country flags data for orbiting animation ── */
+const FLAGS = [
+  { code: 'us', label: 'USA',         emoji: '🇺🇸', angle:   0 },
+  { code: 'ca', label: 'Canada',      emoji: '🇨🇦', angle:  45 },
+  { code: 'ie', label: 'Ireland',     emoji: '🇮🇪', angle:  90 },
+  { code: 'gb', label: 'UK',          emoji: '🇬🇧', angle: 135 },
+  { code: 'au', label: 'Australia',   emoji: '🇦🇺', angle: 180 },
+  { code: 'de', label: 'Germany',     emoji: '🇩🇪', angle: 225 },
+  { code: 'nz', label: 'New Zealand', emoji: '🇳🇿', angle: 270 },
+  { code: 'eu', label: 'Europe',      emoji: '🇪🇺', angle: 315 },
+];
+
+/* ── Animated Hero Visual: girl student + orbiting country flags ── */
+function AnimatedHeroVisual() {
+  return (
+    <div
+      style={{
+        position: 'relative',
+        width: '100%',
+        maxWidth: 420,
+        aspectRatio: '1 / 1',
+      }}
+      className="mx-auto select-none"
+    >
+      {/* ── Orange decorative arc (SVG) ── */}
+      <svg
+        viewBox="0 0 420 420"
+        style={{
+          position: 'absolute',
+          inset: 0,
+          width: '100%',
+          height: '100%',
+          zIndex: 1,
+          pointerEvents: 'none',
+        }}
+        aria-hidden="true"
+      >
+        {/* Main orange arc */}
+        <path
+          d="M 60 330 A 190 190 0 1 1 360 330"
+          fill="none"
+          stroke="#e8a020"
+          strokeWidth="5"
+          strokeLinecap="round"
+          opacity="0.9"
+        />
+        {/* Subtle inner ring */}
+        <circle
+          cx="210"
+          cy="210"
+          r="145"
+          fill="none"
+          stroke="rgba(255,255,255,0.07)"
+          strokeWidth="2"
+        />
+      </svg>
+
+      {/* ── Graduation cap decoration ── */}
+      <div
+        style={{
+          position: 'absolute',
+          top: '4%',
+          right: '14%',
+          zIndex: 3,
+          animation: 'hero-float 3.6s ease-in-out infinite',
+        }}
+        aria-hidden="true"
+      >
+        <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
+          <polygon points="22,5 44,17 22,29 0,17" fill="#e8a020"/>
+          <rect x="5" y="17" width="34" height="16" rx="3" fill="#e8a020" opacity="0.85"/>
+          <line x1="39" y1="17" x2="39" y2="32" stroke="#e8a020" strokeWidth="3" strokeLinecap="round"/>
+          <circle cx="39" cy="33" r="2.5" fill="#e8a020"/>
+        </svg>
+      </div>
+
+      {/* ── Girl student image – circular crop ── */}
+      <div
+        style={{
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          width: '55%',
+          height: '55%',
+          borderRadius: '50%',
+          overflow: 'hidden',
+          zIndex: 2,
+          boxShadow: '0 8px 48px rgba(0,0,0,0.38)',
+          border: '5px solid rgba(255,255,255,0.22)',
+          background: '#f8f8f8',
+        }}
+      >
+        <img
+          src="/hero-girl.png"
+          alt="Happy student ready to study abroad"
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            objectPosition: 'center 15%',
+          }}
+          loading="eager"
+          fetchPriority="high"
+        />
+        {/* Subtle bottom gradient overlay */}
+        <div
+          style={{
+            position: 'absolute',
+            inset: 0,
+            background: 'linear-gradient(to bottom, transparent 55%, rgba(15,23,42,0.25))',
+          }}
+        />
+      </div>
+
+      {/* ── Orbiting country flag circles ── */}
+      {FLAGS.map((flag) => (
+        <div
+          key={flag.code}
+          className="hero-flag"
+          style={
+            {
+              '--start-angle': `${flag.angle}deg`,
+              '--orbit-r': '142px',
+              '--orbit-duration': '18s',
+              '--orbit-delay': '0s',
+              zIndex: 4,
+            } as React.CSSProperties
+          }
+          aria-label={flag.label}
+        >
+          <div
+            style={{
+              width: 50,
+              height: 50,
+              borderRadius: '50%',
+              overflow: 'hidden',
+              border: '3px solid white',
+              boxShadow: '0 4px 16px rgba(0,0,0,0.28)',
+              background: '#fff',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: 26,
+              lineHeight: 1,
+            }}
+            title={flag.label}
+          >
+            {flag.emoji}
+          </div>
+        </div>
+      ))}
+
+    </div>
+  );
+}
 
 export default function Home() {
   return (
@@ -49,31 +207,9 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Hero Image */}
-          <div className="hidden lg:block relative">
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl ring-4 ring-white/10">
-              <img
-                src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&w=700&h=400&fit=crop&auto=format&q=80"
-                alt="Students graduating and studying abroad"
-                width={700} height={320}
-                fetchPriority="high"
-                loading="eager"
-                className="w-full h-80 object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent" />
-            </div>
-            {/* Floating badge */}
-            <div className="absolute -bottom-4 -left-6 bg-white rounded-xl shadow-2xl p-4 border border-gray-100">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center shrink-0">
-                  <CheckCircle size={20} className="text-green-600" />
-                </div>
-                <div>
-                  <p className="text-base text-gray-800">Latest Placement</p>
-                  <p className="text-sm font-semibold text-gray-800">MS CS → University of Toronto</p>
-                </div>
-              </div>
-            </div>
+          {/* ── Animated Hero Visual (girl + orbiting country flags) ── */}
+          <div className="flex items-center justify-center py-6 lg:py-4 w-full max-w-[320px] sm:max-w-[380px] lg:max-w-none mx-auto lg:mx-0">
+            <AnimatedHeroVisual />
           </div>
         </div>
       </section>
@@ -145,6 +281,87 @@ export default function Home() {
             <Link to="/about" className="inline-flex items-center gap-2 btn-outline">
               Learn More About Us <ArrowRight size={14} />
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ──── VISION & MISSION ──── */}
+      <section className="py-12 sm:py-16 px-4 bg-gradient-to-br from-primary to-primary-light relative overflow-hidden">
+        {/* Decorative background circles */}
+        <div className="absolute top-0 right-0 w-48 sm:w-72 h-48 sm:h-72 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/4" aria-hidden="true" />
+        <div className="absolute bottom-0 left-0 w-36 sm:w-56 h-36 sm:h-56 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/4" aria-hidden="true" />
+
+        <div className="max-w-6xl mx-auto relative z-10">
+          {/* Header */}
+          <div className="text-center mb-8 sm:mb-12">
+            <span className="inline-block bg-accent/20 text-accent border border-accent/30 text-xs sm:text-sm font-semibold px-3 sm:px-4 py-1 rounded-full mb-3 sm:mb-4 tracking-wide">
+              Our Purpose
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2 sm:mb-3">Vision &amp; Mission</h2>
+            <p className="text-blue-200 text-sm max-w-xl mx-auto px-2">
+              The principles that drive every decision we make and every student we serve
+            </p>
+          </div>
+
+          {/* Cards — stacked on mobile, side by side on md+ */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+
+            {/* Vision Card */}
+            <div className="relative bg-white/10 backdrop-blur-sm border border-white/15 rounded-2xl p-6 sm:p-8 hover:bg-white/15 transition-all duration-300 group overflow-hidden">
+              <div className="absolute -top-8 -right-8 w-32 h-32 bg-gold/20 rounded-full blur-2xl group-hover:bg-gold/30 transition-all duration-500" aria-hidden="true" />
+
+              <div className="w-12 h-12 sm:w-14 sm:h-14 bg-gold/20 border border-gold/30 rounded-2xl flex items-center justify-center mb-5 sm:mb-6 relative z-10">
+                <svg width="26" height="26" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+                  <circle cx="11" cy="11" r="7" stroke="#e8a020" strokeWidth="2.2" fill="none"/>
+                  <line x1="16.5" y1="16.5" x2="24" y2="24" stroke="#e8a020" strokeWidth="2.2" strokeLinecap="round"/>
+                  <circle cx="11" cy="11" r="3" fill="#e8a020" opacity="0.5"/>
+                </svg>
+              </div>
+
+              <div className="relative z-10">
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="text-gold text-xs font-bold uppercase tracking-widest">Vision</span>
+                  <div className="flex-1 h-px bg-gold/30" />
+                </div>
+                <h3 className="text-lg sm:text-xl font-bold text-white mb-3 sm:mb-4 leading-snug">
+                  To Be India's Most Trusted Study Abroad Partner
+                </h3>
+                <p className="text-blue-100 text-sm leading-relaxed">
+                  We envision a world where every ambitious Indian student has access to world-class international education — regardless of their background, city, or financial starting point. We aim to be the bridge that makes that possible, one student at a time.
+                </p>
+              </div>
+            </div>
+
+            {/* Mission Card */}
+            <div className="relative bg-white/10 backdrop-blur-sm border border-white/15 rounded-2xl p-6 sm:p-8 hover:bg-white/15 transition-all duration-300 group overflow-hidden">
+              <div className="absolute -top-8 -right-8 w-32 h-32 bg-accent/20 rounded-full blur-2xl group-hover:bg-accent/30 transition-all duration-500" aria-hidden="true" />
+
+              <div className="w-12 h-12 sm:w-14 sm:h-14 bg-accent/20 border border-accent/30 rounded-2xl flex items-center justify-center mb-5 sm:mb-6 relative z-10">
+                <svg width="26" height="26" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+                  <circle cx="14" cy="14" r="11" stroke="#0369a1" strokeWidth="2.2" fill="none"/>
+                  <circle cx="14" cy="14" r="7"  stroke="#0369a1" strokeWidth="2.2" fill="none"/>
+                  <circle cx="14" cy="14" r="3"  fill="#0369a1"/>
+                  <line x1="14" y1="3"  x2="14" y2="0"  stroke="#0369a1" strokeWidth="2" strokeLinecap="round"/>
+                  <line x1="14" y1="25" x2="14" y2="28" stroke="#0369a1" strokeWidth="2" strokeLinecap="round"/>
+                  <line x1="25" y1="14" x2="28" y2="14" stroke="#0369a1" strokeWidth="2" strokeLinecap="round"/>
+                  <line x1="3"  y1="14" x2="0"  y2="14" stroke="#0369a1" strokeWidth="2" strokeLinecap="round"/>
+                </svg>
+              </div>
+
+              <div className="relative z-10">
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="text-accent text-xs font-bold uppercase tracking-widest">Mission</span>
+                  <div className="flex-1 h-px bg-accent/40" />
+                </div>
+                <h3 className="text-lg sm:text-xl font-bold text-white mb-3 sm:mb-4 leading-snug">
+                  Expert Guidance at Every Step of the Journey
+                </h3>
+                <p className="text-blue-100 text-sm leading-relaxed">
+                  To provide honest, personalised counselling that covers every step — from choosing the right country and university, to crafting standout applications, securing visas, and preparing for departure — so students arrive abroad with confidence, clarity, and zero surprises.
+                </p>
+              </div>
+            </div>
+
           </div>
         </div>
       </section>

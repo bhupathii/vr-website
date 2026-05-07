@@ -92,6 +92,78 @@
   }
 }
 
+/* ── Hero: Orbiting Country Flags ── */
+@keyframes orbit {
+  from {
+    transform: rotate(var(--start-angle)) translateX(var(--orbit-r)) rotate(calc(-1 * var(--start-angle)));
+  }
+  to {
+    transform: rotate(calc(var(--start-angle) + 360deg)) translateX(var(--orbit-r)) rotate(calc(-360deg + -1 * var(--start-angle)));
+  }
+}
+
+@keyframes hero-float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes badge-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(3, 105, 161, 0.25); }
+  50%       { box-shadow: 0 0 0 8px rgba(3, 105, 161, 0); }
+}
+
+.hero-flag {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 52px;
+  height: 52px;
+  margin: -26px 0 0 -26px;
+  transform-origin: center center;
+  animation: orbit var(--orbit-duration, 14s) linear infinite;
+  animation-delay: var(--orbit-delay, 0s);
+}
+
+.hero-flag img {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.22);
+  border: 3px solid white;
+  background: white;
+}
+
+/* ── Responsive orbit radius for smaller screens ── */
+@media (max-width: 639px) {
+  .hero-flag {
+    --orbit-r: 100px !important;
+    width: 44px;
+    height: 44px;
+    margin: -22px 0 0 -22px;
+  }
+  .hero-flag > div {
+    width: 44px !important;
+    height: 44px !important;
+    font-size: 22px !important;
+  }
+}
+@media (min-width: 640px) and (max-width: 1023px) {
+  .hero-flag {
+    --orbit-r: 120px !important;
+  }
+}
+
 /* Smooth scrolling */
 html {
   scroll-behavior: smooth;
