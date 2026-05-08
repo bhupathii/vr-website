@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { CheckCircle, Users, Landmark, Globe, Award, ArrowRight } from 'lucide-react';
 import CountryCard from '../components/CountryCard';
+import HomeDestinationCard from '../components/HomeDestinationCard';
 import ServiceCard from '../components/ServiceCard';
 import TestimonialCard from '../components/TestimonialCard';
 import EnquiryForm from '../components/EnquiryForm';
@@ -366,25 +367,72 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ──── DESTINATIONS ──── */}
-      <section className="section bg-gray-50">
-        <div className="container-md">
-          <div className="text-center mb-10">
-            <span className="inline-block bg-blue-100 text-blue-700 text-sm font-semibold px-3 py-1 rounded-full mb-3 tracking-wide">
-              Study Destinations
+      {/* ──── DESTINATIONS (Redesigned as per screenshot) ──── */}
+      <section className="section bg-gray-50 overflow-hidden">
+        <div className="container-md max-w-4xl mx-auto px-4">
+          <div className="mb-10 text-center sm:text-left">
+            <span className="text-[#d15f3e] font-bold text-sm tracking-widest uppercase block mb-3">
+              Best Consultancy Services
             </span>
-            <h2 className="text-2xl font-bold text-primary mb-2">Choose Your Destination</h2>
-            <p className="text-gray-700 text-sm">6 top destinations — with costs, visa guides, and university profiles</p>
+            <h2 className="text-4xl sm:text-5xl font-extrabold text-[#111827] mb-6 font-serif leading-tight">
+              Experience, embrace, <br className="hidden sm:block" />
+              <span className="relative whitespace-nowrap">
+                enrich with foreign
+                {/* Orange brush underline */}
+                <svg className="absolute w-full h-3 -bottom-1 left-0 text-[#e8a020]" viewBox="0 0 200 9" fill="none" preserveAspectRatio="none" aria-hidden="true">
+                  <path d="M2.00034 6.78657C34.8018 3.51866 94.6648 0.655866 198.053 2.10093" stroke="currentColor" strokeWidth="4" strokeLinecap="round"/>
+                </svg>
+              </span>{' '}
+              <br className="hidden sm:block" />
+              consultancy
+            </h2>
+            <p className="text-gray-500 text-base sm:text-lg max-w-2xl leading-relaxed">
+              Transformative consultancy awaits. Reserve your exclusive slot for personalized guidance. Elevate aspirations, secure success now!
+            </p>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
-            {countries.map(c => (
-              <CountryCard key={c.slug} {...c} />
-            ))}
-          </div>
-          <div className="text-center mt-8">
-            <Link to="/study-abroad" className="inline-flex items-center gap-2 btn-outline">
-              Compare All Destinations <ArrowRight size={14} />
-            </Link>
+
+          <div className="mt-12">
+            {/* Sub-label with animated airplane trail */}
+            <div className="flex items-center gap-3 mb-8">
+              <p className="text-[#374151] text-lg font-medium tracking-wide">
+                choose your dream country
+              </p>
+              <div className="flex items-center flex-1 max-w-[160px] relative">
+                {/* Animated dashed trail */}
+                <svg className="w-full h-4" viewBox="0 0 160 16" fill="none" aria-hidden="true">
+                  <path
+                    d="M0 8 Q40 2, 80 8 Q120 14, 155 6"
+                    stroke="#9ca3af"
+                    strokeWidth="1.5"
+                    strokeDasharray="5 4"
+                    fill="none"
+                    className="airplane-trail"
+                  />
+                </svg>
+                {/* Airplane icon that flies along the path */}
+                <div className="airplane-icon" aria-hidden="true">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 00-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z" fill="#374151"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            {/* Country Cards Grid/Row */}
+            <div className="flex flex-nowrap overflow-x-auto pb-6 sm:pb-0 no-scrollbar snap-x snap-mandatory sm:flex-wrap sm:justify-start gap-6 sm:gap-10">
+              {[
+                { name: 'USA', flagUrl: 'https://flagcdn.com/w320/us.png', mapMaskUrl: '/maps/us.svg' },
+                { name: 'UK', flagUrl: 'https://flagcdn.com/w320/gb.png', mapMaskUrl: '/maps/gb.svg' },
+                { name: 'Canada', flagUrl: 'https://flagcdn.com/w320/ca.png', mapMaskUrl: '/maps/ca.svg' },
+                { name: 'Australia', flagUrl: 'https://flagcdn.com/w320/au.png', mapMaskUrl: '/maps/au.svg' },
+                { name: 'Germany', flagUrl: 'https://flagcdn.com/w320/de.png', mapMaskUrl: '/maps/de.svg' },
+                { name: 'Ireland', flagUrl: 'https://flagcdn.com/w320/ie.png', mapMaskUrl: '/maps/ie.svg', bgColor: '#16a34a' },
+              ].map(c => (
+                <Link to="/study-abroad" key={c.name} className="block group shrink-0 snap-start">
+                  <HomeDestinationCard name={c.name} flagUrl={c.flagUrl} mapMaskUrl={c.mapMaskUrl} bgColor={c.bgColor} />
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       </section>

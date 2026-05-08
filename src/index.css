@@ -169,6 +169,41 @@ html {
   scroll-behavior: smooth;
 }
 
+/* ── Airplane trail animation (Home destinations) ── */
+@keyframes trail-dash {
+  from { stroke-dashoffset: 0; }
+  to   { stroke-dashoffset: -36; }
+}
+
+@keyframes airplane-fly {
+  0%   { transform: translate(0, 0) rotate(-20deg); }
+  50%  { transform: translate(6px, -3px) rotate(-25deg); }
+  100% { transform: translate(0, 0) rotate(-20deg); }
+}
+
+.airplane-trail {
+  animation: trail-dash 1.2s linear infinite;
+}
+
+.airplane-icon {
+  position: absolute;
+  right: -4px;
+  top: 50%;
+  transform: translate(0, 0) rotate(-20deg);
+  margin-top: -9px;
+  animation: airplane-fly 2.4s ease-in-out infinite;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.12));
+}
+
+/* Hide scrollbar but keep functionality */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 /* Reduce motion for users who prefer it */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
