@@ -1,12 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { CheckCircle, Users, Landmark, Globe, Award, ArrowRight } from 'lucide-react';
-import CountryCard from '../components/CountryCard';
 import HomeDestinationCard from '../components/HomeDestinationCard';
 import ServiceCard from '../components/ServiceCard';
 import TestimonialCard from '../components/TestimonialCard';
 import EnquiryForm from '../components/EnquiryForm';
-import { countries, services, testimonials } from '../data';
+import { services, testimonials } from '../data';
 import SEO from '../components/SEO';
 
 const steps = [
